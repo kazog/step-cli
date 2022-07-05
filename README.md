@@ -15,6 +15,14 @@ $ npm unlink linkname // 删除 link
 
 在package.json 中添加:
 
-"bin": { 
-  "step-cli": "./bin/index" 
-}
+    "bin": { 
+      "step-cli": "./bin/index" 
+    }
+    "type": "module", // 使用ES的加载方式
+
+
+process.argv:
+process.argv[0] Node进程的可执行文件所在的绝对路径 
+process.argv[1] 当前执行的JavaScript文件路径
+process.argv[2] 命令后的 输入 如：step init name 中的name
+

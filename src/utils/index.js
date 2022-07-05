@@ -4,7 +4,16 @@
  * Desc: 
  */
 
-export function clickName(name='') {
+function clickName(name = '') {
 
-  return 
+  return
 }
+
+function clickVersion() {
+
+  return
+}
+
+module.exports = {
+  clickVersion
+};
