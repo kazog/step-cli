@@ -4,18 +4,27 @@
  * Desc: 
  */
 
-console.log('Create New Project');
+const configs = require('../modules/config');
+const { Constants } = require('../modules/constants');
+const { importToCommonJs } = require('../dynamic/index');
+const inquirerES = importToCommonJs('inquirer');
 
-const {prompt} = require('inquirer');
+// console.log('Create New Project');
 
-prompt([
-  {
-    type: 'confirm',
-    name: 'test',
-    message: '你确定使用这个吗?',
-    default: true
-  }
-]).then((answers) => {
-  console.log('结果为:')
-  console.log(answers)
+inquirerES.then((res) => {
+  const inquirer = res.default || {};
+  inquirer.prompt([
+    {
+      type: 'rawlist',
+      name: 'create',
+      message: '选择您要创建的项目类型?',
+      choices: configs.items
+    }
+  ]).then((answer) => {
+    let value = answer.create || '';
+    Constants.env = value;
+    value = value.toLowerCase();
+    console.log('结果为: ' + value);
+    require(`./create/${value}`);
+  });
 });

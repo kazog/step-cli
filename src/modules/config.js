@@ -3,8 +3,6 @@
  * Create Date: 2022-0704
  * Desc: 
  */
-//  const { name, version } = require('../../package.json');
-
 
 const actions = {
   init: {
@@ -37,11 +35,12 @@ const actions = {
   }
 };
 
-// const configs = {
-//   actions
-// };
+const items = ['Vue', 'Flutter', 'React', 'ReactNative', 'WeChat'];
+
+// const configs = { actions };
 // export default configs;
 
 module.exports = {
-  actions
+  actions,
+  items
 };
