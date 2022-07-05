@@ -4,23 +4,37 @@
  * Desc: 
  */
 
-const { program, Option } = require('commander');
-const {version} = require('../../package.json');
+
+const { program } = require('commander');
+const { version } = require('../../package.json');
+const { actions } = require('../modules/config')
 
 
-program.version(version, '-v, --version').usage();
+let UsageDesc = '\nUsages:';
 
-program
-  .addOption(new Option('-s, --secret').hideHelp())
-  .addOption(new Option('-t, --timeout <delay>', 'timeout in seconds').default(60, 'one minute'))
-  .addOption(new Option('-d, --drink <size>', 'drink size').choices(['small', 'medium', 'large']))
+for (const key in actions) {
+  const action = actions[key];
+  
+  UsageDesc += `\n  ${action.usage.join()}`;
+  
+  program.command(key) //配置命令的名字
+    .alias(action.alias) // 命令的别名
+    .description(action.desc) // 命令对应的描述
+    .action(() => {  //动作
+      if (action === '*') {  //访问不到对应的命令 就打印找不到命令
+        console.log(action.desc);
+      } else {
+        console.log(action);
+        // 分解命令 到文件里 有多少文件 就有多少配置 create config
+        // lee-cli create project-name ->[node,lee-cli,create,project-name]
+        console.log(process.argv);
+      }
+    });
+}
 
-// 初始化项目模板
-program
-  .command('create <template-name> <project-name>')
-  .description('create a new project from a template')
-  .action((templateName, projectName, cmd) => {
-    // 输入参数校验
-    console.log(process.argv);
-  });
-  console.log(version);
+// 监听用户的help事件
+program.on('--help', () => {
+  console.log(UsageDesc);
+})
+
+program.version(version, '-v, --version').parse(process.argv); // process.argv 是用户在命令行中传入的参数

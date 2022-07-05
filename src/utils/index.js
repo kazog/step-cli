@@ -3,3 +3,8 @@
  * Create Date: 2022-07-04
  * Desc: 
  */
+
+export function clickName(name='') {
+
+  return 
+}
