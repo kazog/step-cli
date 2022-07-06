@@ -36,11 +36,13 @@ const actions = {
 };
 
 const items = ['Vue', 'Flutter', 'React', 'ReactNative', 'WeChat'];
+const langues = ['JS', 'TS', 'Dart'];
 
 // const configs = { actions };
 // export default configs;
 
 module.exports = {
   actions,
+  langues,
   items
 };

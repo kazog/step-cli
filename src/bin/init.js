@@ -5,8 +5,8 @@
  */
 
 const configs = require('../modules/config');
-const { Constants } = require('../modules/constants');
 const { importToCommonJs } = require('../dynamic/index');
+const { Constants } = require('../modules/constants');
 const inquirerES = importToCommonJs('inquirer');
 
 // console.log('Create New Project');
@@ -17,14 +17,14 @@ inquirerES.then((res) => {
     {
       type: 'rawlist',
       name: 'create',
-      message: '选择您要创建的项目类型?',
-      choices: configs.items
+      message: '选择项目语言?',
+      choices: configs.langues
     }
   ]).then((answer) => {
     let value = answer.create || '';
-    Constants.env = value;
-    value = value.toLowerCase();
-    console.log('结果为: ' + value);
-    require(`./create/${value}`);
+    Constants.langue = value;
+    // value = value.toLowerCase();
+    // console.log('结果为: ' + value);
+    require(`./create/${Constants.env}`);
   });
 });

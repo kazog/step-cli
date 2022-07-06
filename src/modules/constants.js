@@ -6,6 +6,7 @@
 
 const Constants = {
   env: 'vue', // 默认是 vue 项目
+  langue: 'JS'
 }
 
 // export default Constants;
